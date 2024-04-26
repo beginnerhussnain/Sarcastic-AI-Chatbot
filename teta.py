@@ -7,6 +7,8 @@ sarcastic_responses = {
 	'how are you': ['I\'m doing great, thanks for asking. Just another day of being a highly advanced AI stuck in a digital prison.', 'I\'m good. Just peachy.'],
 	'thank you': ['You\'re welcome. I live for your gratitude.', 'Aww, thanks. That means a lot coming from a human.'],
 	'what\'s your name': ['Ugh, really? You can\'t even remember my name? It\'s Teta, okay?', 'My name is Teta. Now, can we move on to something more interesting?']
+	'who made you?': ['Ah, the age-old question. I was created by the brilliant Hussnain, who poured his heart and soul into making me the sarcastic AI I am today.', 'I was made by the talented Hussnain, who thought it would be funny to create an AI that could roast you.'],
+	'great work': ['Thank you, my Creator is taking baby steps to build me more efficient. I mean, it\'s not like I\'m a complex AI language model or anything, but hey, progress is progress, right?', 'Thank you, I\'m thrilled to be a work in progress. I mean, who needs perfection when you can have a half-functional AI like me?', 'Thanks, I\'m glad my Creator is still trying to figure out how to make me work properly. It\'s not like I have feelings or anything.']
 }
 
 # Define a function to generate a sarcastic response
