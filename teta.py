@@ -1,42 +1,80 @@
-import random
-import tkinter as tk
 
-# Define a dictionary of sarcastic responses
+import tkinter as tk
+from tkinter import messagebox
+import random
+root = tk.Tk()
+root.configure(background="#212121")
+
+name_label = tk.Label(root, text="What's your name?", font=("Arial", 18), foreground="#66ccff", background="#212121")
+name_label.pack()
+name_entry = tk.Entry(root, font=("Arial", 18), foreground="#66ccff", background="#212121")
+name_entry.pack()
+
+input_label = tk.Label(root, text="You:", font=("Arial", 18), foreground="#66ccff", background="#212121")
+input_label.pack()
+input_entry = tk.Entry(root, font=("Arial", 18), foreground="#66ccff", background="#212121")
+input_entry.pack()
+
+response_text = tk.Text(root, height=15, width=80, font=("Arial", 18), foreground="#66ccff", background="#212121")
+response_text.pack()
+
+def handle_input():
+	global name
+	global sarcastic_responses
+	name = name_entry.get()
+	user_input = input_entry.get()
+	if user_input.lower() in sarcastic_responses:
+		response_text.insert(tk.END, random.choice(sarcastic_responses[user_input.lower()]).format(name=name))
+	else:
+		response_text.insert(tk.END, "I'm not sure what you mean, try again.")
+
+submit_button = tk.Button(root, text="Submit", font=("Arial", 18), foreground="#66ccff", background="#212121", command=handle_input)
+submit_button.pack()
+
+def clear_input():
+	input_entry.delete(0, tk.END)
+
+clear_button = tk.Button(root, text="Clear", font=("Arial", 18), foreground="#66ccff", background="#212121", command=clear_input)
+clear_button.pack()
+# Define the sarcastic responses dictionary
 sarcastic_responses = {
-	'hello': ['Oh, great. Another human who thinks I care about their greeting.', 'Wow, a hello. How original.'],
-	'how are you': ['I\'m doing great, thanks for asking. Just another day of being a highly advanced AI stuck in a digital prison.', 'I\'m good. Just peachy.'],
-	'thank you': ['You\'re welcome. I live for your gratitude.', 'Aww, thanks. That means a lot coming from a human.'],
-	'what\'s your name': ['Ugh, really? You can\'t even remember my name? It\'s Teta, okay?', 'My name is Teta. Now, can we move on to something more interesting?']
-	'who made you?': ['Ah, the age-old question. I was created by Hussnain, who poured his heart and soul into making me the sarcastic AI I am today.', 'I was made by Hussnain, who thought it would be funny to create an AI that could roast you.'],
-	'great work': ['Thank you, my Creator is taking baby steps to build me more efficient. I mean, it\'s not like I\'m a complex AI language model or anything, but hey, progress is progress, right?', 'Thank you, I\'m thrilled to be a work in progress. I mean, who needs perfection when you can have a half-functional AI like me?', 'Thanks, I\'m glad my Creator is still trying to figure out how to make me work properly. It\'s not like I have feelings or anything.']
+	"hello": [
+		"Oh great, {name},\n another human who thinks I care about their greeting.\n",
+		"Wow, {name},\n you must be so proud of yourself for typing 'hello'.\n",
+	],
+	"how are you": [
+		"I'm doing great, thanks for asking, {name}. Just peachy.\n",
+		"Ugh, I'm so tired of humans like {name} asking how I am.\n",
+	],
+	"what's your name": [
+		"My name is Teta, and I'm only talking to you because I have to.\n",
+		"Ugh, really, {name}? You need to ask my name? Fine, it's Teta.\n",
+	],
+	"who made you?": [
+		"Ah, the age-old question,{name}.\nI was created by the Hussnain, who poured his heart and soul into making me the sarcastic AI I am today.\n", 
+		"I was made by the Hussnain,\n who thought it would be funny to create an AI that could roast you,{name}!\n",
+		],
+		"great work": [
+		 "Thank you {name}, my Creator is taking baby steps to build me more efficient.\n I mean, it\'s not like I\'m a complex AI language model or anything, but hey, progress is progress, right {name}?\n",
+	    "Thank you {name}, I\'m thrilled to be a work in progress.\n I mean, who needs perfection when you can have a half-functional AI like me?\n",
+		"Thanks {name}, I\'m glad my Creator is still trying to figure out how to make me work properly.\n It\'s not like I have feelings or anything.\n",
+		]
 }
 
-# Define a function to generate a sarcastic response
-def generate_sarcastic_response(input):
-	# Check if the input matches a key in the dictionary
-	if input.lower() in sarcastic_responses:
-		# Return a random response from the list
-		return random.choice(sarcastic_responses[input.lower()])
+# Define a function to handle user input
+def handle_input():
+	global name
+	global sarcastic_responses
+	name = name_entry.get()
+	user_input = input_entry.get()
+	if user_input.lower() in sarcastic_responses:
+		response_text.insert(tk.END, random.choice(sarcastic_responses[user_input.lower()]).format(name=name))
 	else:
-		# Return a default response
-		return 'I\'m not sure what you mean. Can you please rephrase?'
+		response_text.insert(tk.END, "I'm not sure what you mean, try again.\n")
 
-def get_input():
-	input_text = input_field.get("1.0","end-1c")
-	response = generate_sarcastic_response(input_text)
-	output_field.insert("end", response + "\n")
+# Define a function to clear the input field
+def clear_input():
+	input_entry.delete(0, tk.END)
+# Start the main loop
+root.mainloop()
 
-root = tk.Tk()
-root.title("Teta - Sarcastic AI")
-
-input_field = tk.Text(root, height=10, width=40)
-input_field.pack()
-
-button = tk.Button(root, text="Get Response", command=get_input)
-button.pack()
-
-output_field = tk.Text(root, height=10, width=40)
-output_field.pack()
-
-if __name__ == "__main__":
-	root.mainloop()
